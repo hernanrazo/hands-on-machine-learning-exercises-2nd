@@ -1,7 +1,0 @@
-import os
-import pandas as pd
-
-data = pd.read_csv('ch2/housing.csv')
-
-
-data.head()
