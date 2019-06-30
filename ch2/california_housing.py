@@ -90,7 +90,9 @@ for set in (strat_train_set, strat_test_set):
 
 #data cleaning
 
+print(' ')
 print('starting data cleaning process...')
+print(' ')
 
 housing = strat_train_set.drop('median_house_value', axis = 1)
 housing_labels = strat_train_set['median_house_value'].copy()
@@ -110,9 +112,28 @@ imputer = SimpleImputer(strategy = 'median')
 housing_num = housing.drop('ocean_proximity', axis = 1)
 
 
+imputer.fit(housing_num)
 
+imputer.statistics_
 
+x = imputer.transform(housing_num)
 
+housing_tr = pd.DataFrame(x, columns = housing_num.columns, index = housing.index)
+housing_tr.loc[sample_incomplete_rows.index.values]
+
+housing_cat = housing[['ocean_proximity']]
+
+try:
+    from sklearn.preprocessing import OrdinalEncoder
+except ImportError:
+    from future_encoders import OrdinalEncoder
+
+ordinal_encoder = OrdinalEncoder()
+housing_cat_encoded = ordinal_encoder.fit_transform(housing_cat)
+housing_cat_encoded[:10]
+
+try:
+    #line 63:
 
 
 
